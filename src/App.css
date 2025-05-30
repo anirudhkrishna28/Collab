@@ -1,42 +1,234 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Make the layout responsive for the main flex container */
+.app-container {
+  display: flex;
+  height: 100vh;
+  flex-direction: row;
+  width: 100vw;
+  overflow: hidden;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Editor section should take all space except the sidebar */
+.editor-section {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Sidebar for video and chat */
+.sidebar-section {
+  width: 400px;
+  min-width: 280px;
+  max-width: 100vw;
+  padding: 10px;
+  background-color: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+/* Responsive videos */
+.sidebar-video-stack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.sidebar-video-stack video {
+  width: 100%;
+  min-width: 0;
+  min-height: 100px;
+  height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #111;
+  display: block;
+  border: 3px solid #63e6be;
+}
+
+/* Second video with gold border */
+.sidebar-video-stack video:last-child {
+  border-color: #FFD700;
+}
+
+/* Mute button */
+.mute-btn {
+  margin-bottom: 12px;
+  background: #63e6be;
+  color: #202;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 0;
+  font-weight: 700;
+  font-size: 1.07em;
+  cursor: pointer;
+  box-shadow: 0 1px 6px #0003;
+  width: 100%;
+}
+
+/* Chat box styles */
+.chat-container {
+  background: #232323;
+  border-radius: 8px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+  box-shadow: 0 0 8px #1118;
+}
+
+.chat-header {
+  background: #181818;
+  padding: 6px 10px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.07em;
+}
+
+.chat-messages {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 12px 10px;
+  background: #232323;
+  color: #eee;
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chat-message-row {
+  display: flex;
+}
+
+.chat-message-row.self {
+  justify-content: flex-end;
+}
+.chat-message-row.other {
+  justify-content: flex-start;
+}
+
+.chat-bubble {
+  border-radius: 18px;
+  padding: 7px 14px;
+  max-width: 70%;
+  min-width: 50px;
+  box-shadow: 0 0 6px #63e6be44;
+  text-align: left;
+  font-weight: 500;
+  background: #63e6be;
+  color: #222;
+}
+
+.chat-message-row.other .chat-bubble {
+  background: #2a2a2a;
+  color: #FFD700;
+  box-shadow: 0 0 6px #1116;
+}
+
+.chat-username {
+  font-size: 0.94em;
+  margin-bottom: 2px;
+  font-weight: 600;
+  color: #167d62;
+}
+
+.chat-message-row.other .chat-username {
+  color: #FFD700;
+}
+
+.chat-text {
+  word-break: break-word;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.chat-message-row.other .chat-text {
+  color: #fafafa;
+}
+
+.chat-form {
+  display: flex;
+  padding: 8px;
+  background: #181818;
+}
+
+.chat-input {
+  flex: 1 1 auto;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  margin-right: 8px;
+  background: #252525;
+  color: #fff;
+  font-size: 1em;
+  min-width: 0;
+}
+
+.chat-send-btn {
+  background: #63e6be;
+  color: #222;
+  padding: 0 22px;
+  border-radius: 20px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1.07em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+  .sidebar-section {
+    width: 270px;
+    min-width: 0;
+    padding: 6px;
   }
-  to {
-    transform: rotate(360deg);
+  .sidebar-video-stack video {
+    height: 90px;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 690px) {
+  .app-container {
+    flex-direction: column;
+  }
+  .sidebar-section {
+    width: 100vw;
+    min-width: 0;
+    padding: 6px 2vw;
+    box-sizing: border-box;
+  }
+  .sidebar-video-stack video {
+    height: 70px;
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+/* Make chat input and send button shrink properly on mobile */
+@media (max-width: 480px) {
+  .chat-header {
+    font-size: 1em;
+    padding: 4px 6px;
+  }
+  .chat-messages {
+    padding: 6px 4px;
+    font-size: 0.9em;
+  }
+  .chat-form {
+    padding: 4px;
+  }
+  .chat-input {
+    font-size: 0.9em;
+    padding: 6px;
+    margin-right: 4px;
+  }
+  .chat-send-btn {
+    padding: 0 12px;
+    font-size: 0.97em;
+  }
 }
